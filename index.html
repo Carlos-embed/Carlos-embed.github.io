@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carlos Canales — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #e2e0d8;
+    --text: #1a1916;
+    --muted: #6b6960;
+    --accent: #1a1916;
+    --tag-bg: #eceae4;
+    --nav-h: 64px;
+    --max: 1080px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(245,244,240,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 14px; color: var(--muted);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── LAYOUT ── */
+  main { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+  section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* ── HERO ── */
+  #hero {
+    padding-top: calc(var(--nav-h) + 6rem);
+    padding-bottom: 6rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .hero-name em { font-style: normal; font-weight: 500; }
+  .hero-tagline {
+    font-size: 1rem; color: var(--muted);
+    max-width: 380px; line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    transition: all .2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--text); color: var(--bg);
+  }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--text); }
+
+  .hero-visual {
+    display: flex; justify-content: flex-end;
+  }
+  .pcb-art {
+    width: 320px; height: 320px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pcb-art svg { width: 100%; height: 100%; }
+
+  /* ── SECTION HEADERS ── */
+  .s-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .s-title {
+    font-size: 1.75rem; font-weight: 300;
+    letter-spacing: -0.02em; margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start;
+  }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-skills { display: flex; flex-direction: column; gap: 1.5rem; }
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--tag-bg); color: var(--text);
+    font-size: 12px; padding: 4px 10px; border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow .2s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+  .card-thumb {
+    height: 180px;
+    background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .card-thumb-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
+  }
+  .card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+  .card-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .card-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; flex: 1; margin-bottom: 1rem; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .card-tag {
+    background: var(--tag-bg); color: var(--muted);
+    font-size: 11px; padding: 2px 8px; border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+  }
+  .card-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-top: 0.75rem;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #b0aca0;
+  }
+  .dot.active { background: #5a9e6e; }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-intro { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 14px; color: var(--text); text-decoration: none;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border); border-radius: 7px;
+    background: var(--surface); transition: border-color .2s;
+  }
+  .contact-link:hover { border-color: var(--text); }
+  .contact-link-label { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-link-value { font-weight: 500; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1px solid var(--border); border-radius: 7px;
+    background: var(--surface); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    outline: none; transition: border-color .2s;
+    resize: vertical;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--text); }
+  .contact-form textarea { min-height: 120px; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: var(--max); margin: 0 auto; padding: 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .footer-copy { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    #about .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .nav-links { gap: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">CC</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pcb">PCB</a></li>
+    <li><a href="#embedded">Embedded</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div>
+      <p class="hero-label">Hardware Engineer</p>
+      <h1 class="hero-name">Carlos<br><em>Canales</em></h1>
+      <p class="hero-tagline">
+        Designing circuits and embedded systems that bridge the gap between
+        hardware and the real world. Based in Texas.
+      </p>
+      <div class="hero-cta">
+        <a href="#pcb" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="pcb-art">
+        <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- PCB grid background -->
+          <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="0.8" fill="#d4d1c8"/>
+            </pattern>
+          </defs>
+          <rect width="320" height="320" fill="url(#grid)"/>
+          <!-- Traces -->
+          <path d="M60 160 H120 V80 H200" stroke="#c8c5bc" stroke-width="2" fill="none"/>
+          <path d="M60 200 H100 V240 H260" stroke="#c8c5bc" stroke-width="2" fill="none"/>
+          <path d="M160 160 V240" stroke="#c8c5bc" stroke-width="2" fill="none"/>
+          <path d="M200 80 H260 V130" stroke="#c8c5bc" stroke-width="2" fill="none"/>
+          <path d="M120 200 V80" stroke="#d4d1c8" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
+          <!-- IC chip center -->
+          <rect x="128" y="128" width="64" height="64" rx="4" fill="#1a1916"/>
+          <text x="160" y="164" text-anchor="middle" fill="#f5f4f0" font-family="DM Mono, monospace" font-size="9">U1</text>
+          <!-- IC pins -->
+          <rect x="110" y="136" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="110" y="148" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="110" y="160" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="192" y="136" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="192" y="148" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="192" y="160" width="18" height="4" rx="1" fill="#a8a49c"/>
+          <rect x="136" y="110" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <rect x="150" y="110" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <rect x="164" y="110" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <rect x="136" y="192" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <rect x="150" y="192" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <rect x="164" y="192" width="4" height="18" rx="1" fill="#a8a49c"/>
+          <!-- Vias -->
+          <circle cx="60" cy="160" r="5" fill="#a8a49c" stroke="#f5f4f0" stroke-width="1.5"/>
+          <circle cx="60" cy="200" r="5" fill="#a8a49c" stroke="#f5f4f0" stroke-width="1.5"/>
+          <circle cx="260" cy="130" r="5" fill="#a8a49c" stroke="#f5f4f0" stroke-width="1.5"/>
+          <circle cx="260" cy="240" r="5" fill="#a8a49c" stroke="#f5f4f0" stroke-width="1.5"/>
+          <!-- Capacitors -->
+          <rect x="74" y="74" width="16" height="8" rx="2" fill="#6b6960"/>
+          <rect x="80" y="68" width="2" height="20" fill="#a8a49c"/>
+          <rect x="86" y="68" width="2" height="20" fill="#a8a49c"/>
+          <!-- Resistors -->
+          <rect x="240" y="74" width="24" height="10" rx="3" fill="#8b8880" stroke="#a8a49c" stroke-width="0.5"/>
+          <rect x="240" y="74" width="6" height="10" fill="#c8a86c" rx-left="3"/>
+          <rect x="258" y="74" width="6" height="10" fill="#6b8bc8"/>
+          <!-- Corner mounting holes -->
+          <circle cx="24" cy="24" r="6" fill="none" stroke="#c8c5bc" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="2.5" fill="#c8c5bc"/>
+          <circle cx="296" cy="24" r="6" fill="none" stroke="#c8c5bc" stroke-width="1.5"/>
+          <circle cx="296" cy="24" r="2.5" fill="#c8c5bc"/>
+          <circle cx="24" cy="296" r="6" fill="none" stroke="#c8c5bc" stroke-width="1.5"/>
+          <circle cx="24" cy="296" r="2.5" fill="#c8c5bc"/>
+          <circle cx="296" cy="296" r="6" fill="none" stroke="#c8c5bc" stroke-width="1.5"/>
+          <circle cx="296" cy="296" r="2.5" fill="#c8c5bc"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="s-label">About</p>
+    <h2 class="s-title">Background</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          <!-- ✏️ Replace this with your own bio -->
+          Hi, I'm Carlos — a hardware engineer passionate about designing PCBs and
+          building embedded systems that solve real-world problems. I enjoy the full
+          cycle from schematic capture and layout to firmware development and testing.
+        </p>
+        <p>
+          <!-- ✏️ Add more details: education, current role, goals, etc. -->
+          I'm currently working on personal projects in the PCB and embedded systems
+          space. This portfolio is where I'll document and share those builds as they
+          come to life.
+        </p>
+        <p>
+          <!-- ✏️ Feel free to remove or edit this paragraph -->
+          When I'm not at the bench, I enjoy learning new tools, reading datasheets,
+          and looking for creative ways to apply electronics to everyday challenges.
+        </p>
+      </div>
+      <div class="about-skills">
+        <div>
+          <p class="skill-group-label">PCB Tools</p>
+          <div class="tags">
+            <span class="tag">KiCad</span>
+            <span class="tag">Altium</span>
+            <span class="tag">EasyEDA</span>
+            <span class="tag">JLCPCB</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Embedded</p>
+          <div class="tags">
+            <span class="tag">C / C++</span>
+            <span class="tag">STM32</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">RTOS</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Protocols</p>
+          <div class="tags">
+            <span class="tag">I²C</span>
+            <span class="tag">SPI</span>
+            <span class="tag">UART</span>
+            <span class="tag">CAN</span>
+            <span class="tag">USB</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Lab</p>
+          <div class="tags">
+            <span class="tag">Oscilloscope</span>
+            <span class="tag">Logic Analyzer</span>
+            <span class="tag">Soldering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PCB PROJECTS -->
+  <section id="pcb">
+    <p class="s-label">Projects — PCB Design</p>
+    <h2 class="s-title">Circuit Boards</h2>
+    <div class="projects-grid">
+
+      <!-- ── Card 1 (placeholder) ── -->
+      <div class="project-card">
+        <div class="card-thumb">
+          <span class="card-thumb-label">[ Photo / Render ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">PCB Design</p>
+          <h3 class="card-title">Project Name Here</h3>
+          <p class="card-desc">
+            Short description of what this board does, its key features,
+            and what problem it solves. Edit this card with your real project.
+          </p>
+          <div class="card-tags">
+            <span class="card-tag">2-layer</span>
+            <span class="card-tag">KiCad</span>
+            <span class="card-tag">STM32</span>
+          </div>
+          <div class="card-status">
+            <span class="dot"></span> In progress
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 2 (placeholder) ── -->
+      <div class="project-card">
+        <div class="card-thumb">
+          <span class="card-thumb-label">[ Photo / Render ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">PCB Design</p>
+          <h3 class="card-title">Project Name Here</h3>
+          <p class="card-desc">
+            Short description of what this board does, its key features,
+            and what problem it solves. Edit this card with your real project.
+          </p>
+          <div class="card-tags">
+            <span class="card-tag">4-layer</span>
+            <span class="card-tag">Altium</span>
+            <span class="card-tag">RF</span>
+          </div>
+          <div class="card-status">
+            <span class="dot"></span> In progress
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Add Project card ── -->
+      <div class="project-card" style="border-style: dashed; background: transparent; align-items: center; justify-content: center; min-height: 280px; cursor: default;">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="font-size: 2rem; color: var(--border); margin-bottom: 0.75rem;">+</div>
+          <p style="font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace;">More coming soon</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EMBEDDED PROJECTS -->
+  <section id="embedded">
+    <p class="s-label">Projects — Embedded Systems</p>
+    <h2 class="s-title">Firmware & Systems</h2>
+    <div class="projects-grid">
+
+      <!-- ── Card 1 (placeholder) ── -->
+      <div class="project-card">
+        <div class="card-thumb">
+          <span class="card-thumb-label">[ Demo / Photo ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">Embedded Systems</p>
+          <h3 class="card-title">Project Name Here</h3>
+          <p class="card-desc">
+            Short description of this embedded project — the MCU used,
+            the firmware stack, and what it controls or measures.
+          </p>
+          <div class="card-tags">
+            <span class="card-tag">ESP32</span>
+            <span class="card-tag">FreeRTOS</span>
+            <span class="card-tag">C</span>
+          </div>
+          <div class="card-status">
+            <span class="dot"></span> In progress
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Card 2 (placeholder) ── -->
+      <div class="project-card">
+        <div class="card-thumb">
+          <span class="card-thumb-label">[ Demo / Photo ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">Embedded Systems</p>
+          <h3 class="card-title">Project Name Here</h3>
+          <p class="card-desc">
+            Short description of this embedded project — the MCU used,
+            the firmware stack, and what it controls or measures.
+          </p>
+          <div class="card-tags">
+            <span class="card-tag">STM32</span>
+            <span class="card-tag">HAL</span>
+            <span class="card-tag">CAN Bus</span>
+          </div>
+          <div class="card-status">
+            <span class="dot"></span> In progress
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Add Project card ── -->
+      <div class="project-card" style="border-style: dashed; background: transparent; align-items: center; justify-content: center; min-height: 280px; cursor: default;">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="font-size: 2rem; color: var(--border); margin-bottom: 0.75rem;">+</div>
+          <p style="font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace;">More coming soon</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="s-label">Contact</p>
+    <h2 class="s-title">Get in Touch</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">
+          Interested in collaborating, have feedback on a project, or just
+          want to talk hardware? I'd love to hear from you.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="contact-link">
+            <div>
+              <p class="contact-link-label">Email</p>
+              <p class="contact-link-value">your@email.com</p>
+            </div>
+          </a>
+          <a href="https://github.com/yourhandle" class="contact-link" target="_blank">
+            <div>
+              <p class="contact-link-label">GitHub</p>
+              <p class="contact-link-value">github.com/yourhandle</p>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/yourhandle" class="contact-link" target="_blank">
+            <div>
+              <p class="contact-link-label">LinkedIn</p>
+              <p class="contact-link-value">linkedin.com/in/yourhandle</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <input type="text" placeholder="Your name" />
+          <input type="email" placeholder="Your email" />
+          <textarea placeholder="Your message…"></textarea>
+          <button class="btn btn-primary" style="align-self: flex-start;">Send message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-copy">© 2025 Carlos Canales</span>
+  <span class="footer-copy">PCB & Embedded Systems</span>
+</footer>
+
+</body>
+</html>
