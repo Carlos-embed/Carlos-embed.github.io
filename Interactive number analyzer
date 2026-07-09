@@ -1,0 +1,84 @@
+/* 
+Interactive Number Analyzer
+
+This program will ask the user for a number and will run tests that consist of:
+1. If a number is odd or even
+2. If a number is prime
+3. If a number is positive, negative, or zero
+*/
+
+#include <stdio.h>
+
+
+int main() {
+
+	int number;
+	
+	printf("Welcome to the Interactive Number Analyzer!");
+	printf("\nplease enter a number: ");
+	scanf_s("%d", &number);
+
+	while (number != 0) { // will loop until user inputs 0
+
+
+		if (number <= 0) //tests for negative number
+		{
+			if (number % 2 == 0) // tests for even negative number
+			{
+				printf("\n%d is a negative even number and is not considered a prime number!\n", number);
+				printf("\npick another or pick 0 to end: ");
+				scanf_s("%d", &number);
+			}
+			else // tests for odd negative number
+			{
+				printf("\n%d is a negative odd number and is not considered a prime number!\n", number);
+				printf("\npick another or pick 0 to end: ");
+				scanf_s("%d", &number);
+			}
+		}
+		else
+		{
+			
+			if (number % 2 == 0) // Tests for even postive number
+			{
+
+				if (number == 2) // tests if number is 2
+				{
+					printf("\n%d is a postive even number and is a prime number!\n", number);
+					printf("\npick another or pick 0 to end: ");
+					scanf_s("%d", &number);
+				}
+				else // Outputs for even positive number that is not a prime number
+				{
+					printf("\n%d is a postive even number and is not a prime number!\n", number);
+					printf("\npick another or pick 0 to end: ");
+					scanf_s("%d", &number);
+				}
+								
+			}
+			else // outputs for oddpositivee number
+			{
+				if (number == 1) // tests if number is 1
+				{
+					printf("\n%d is a postive odd number and is not prime number!\n", number);
+					printf("\npick another or pick 0 to end: ");
+					scanf_s("%d", &number);
+				}
+				else // Outputs an odpositiveve number that is most likely a prime number
+				{
+					printf("\n%d is a postive odd number and is most likely a prime number!\n", number);
+					printf("\npick another or pick 0 to end: ");
+					scanf_s("%d", &number);
+				}
+				
+			}
+
+		}
+
+		
+	}
+
+	printf("\n%d is zero and it's not postive/negtive nor even/odd nor a prime number!\n", number);
+	return 0;
+	
+}
